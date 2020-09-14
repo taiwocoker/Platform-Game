@@ -1,30 +1,35 @@
 {
   "name": "platform-game",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.1.0",
+  "description": "An endless runner implemented with phaser",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "watch": "webpack --watch"
+    "build": "webpack --config webpack/prod.js ",
+    "start": "webpack-dev-server --config webpack/base.js --open"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/taiwocoker/Platform-Game.git"
   },
-  "keywords": [],
   "author": "Taiwo Coker",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/taiwocoker/Platform-Game/issues"
-  },
-  "homepage": "https://github.com/taiwocoker/Platform-Game#readme",
+  "license": "MIT",
+  "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
+  
   "devDependencies": {
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "raw-loader": "^3.1.0",
+    "terser-webpack-plugin": "^2.2.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "babel-loader": "^8.1.0",
-    "phaser": "^3.24.1"
+    "phaser": "^3.20.1"
   }
 }
