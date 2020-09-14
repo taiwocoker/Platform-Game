@@ -1,0 +1,30 @@
+{
+  "name": "platform-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taiwocoker/Platform-Game.git"
+  },
+  "keywords": [],
+  "author": "Taiwo Coker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taiwocoker/Platform-Game/issues"
+  },
+  "homepage": "https://github.com/taiwocoker/Platform-Game#readme",
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "babel-loader": "^8.1.0",
+    "phaser": "^3.24.1"
+  }
+}
