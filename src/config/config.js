@@ -5,6 +5,7 @@ export default {
   parent: 'phaser-example',
   width: 1500,
   height: 800,
+  backgroundColor: 0x87CEEB,
   pixelArt: true,
   physics: {
     default: 'arcade',

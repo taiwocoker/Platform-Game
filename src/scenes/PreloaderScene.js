@@ -86,7 +86,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('box', '../src/assets/ui/grey_box.png');
     this.load.image('checkedBox', '../src/assets/ui/blue_boxCheckmark.png');
     this.load.image('platform', '../src/assets/ground.png');
-    this.load.image('player', '../src/assets/player.png');
+    this.load.spritesheet('player', '../src/assets/player.png',{frameWidth: 100, frameHeight: 48});
     this.load.audio('bgMusic', ['../src/assets/TownTheme.mp3']);
   }
 
