@@ -91,6 +91,10 @@ export default class PreloaderScene extends Phaser.Scene {
       frameWidth: 20,
       frameHeight: 20
   });
+    this.load.spritesheet("fire", "../src/assets/fire.png", {
+      frameWidth: 40,
+      frameHeight: 70
+});
     this.load.audio('bgMusic', ['../src/assets/TownTheme.mp3']);
   }
 

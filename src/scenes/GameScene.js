@@ -15,7 +15,8 @@ let gameOptions = {
     jumpForce: 400,
     playerStartPosition: 200,
     jumps: 2,
-    coinPercent: 25
+    coinPercent: 25,
+    firePercent: 25
 }
 
 export default class GameScene extends Phaser.Scene {
@@ -31,6 +32,10 @@ export default class GameScene extends Phaser.Scene {
       frameWidth: 20,
       frameHeight: 20
   });
+    this.load.spritesheet("fire", "../src/assets/fire.png", {
+      frameWidth: 40,
+      frameHeight: 70
+});
   }
 
   create () {
@@ -72,6 +77,24 @@ this.coinPool = this.add.group({
   }
 });
 
+// / group with all active firecamps.
+        this.fireGroup = this.add.group({
+ 
+            // once a firecamp is removed, it's added to the pool
+            removeCallback: function(fire){
+                fire.scene.firePool.add(fire)
+            }
+        });
+ 
+        // fire pool
+        this.firePool = this.add.group({
+ 
+            // once a fire is removed from the pool, it's added to the active fire group
+            removeCallback: function(fire){
+                fire.scene.fireGroup.add(fire)
+            }
+        });
+
 // number of consecutive jumps made by the player
 this.playerJumps = 0;
  
@@ -81,7 +104,10 @@ this.addPlatform(config.width, config.width / 2, config.height * gameOptions.pla
 // adding the player;
 this.player = this.physics.add.sprite(gameOptions.playerStartPosition, config.height * 0.7, "player");
 this.player.setGravityY(gameOptions.playerGravity);
-
+this.player.setDepth(2);
+ 
+// the player is not dying
+this.dying = false;
 // setting player animation
 this.anims.create({
   key: "run",
@@ -105,9 +131,20 @@ this.anims.create({
   repeat: -1
 });
 
+// setting fire animation
+this.anims.create({
+  key: "burn",
+  frames: this.anims.generateFrameNumbers("fire", {
+      start: 0,
+      end: 4
+  }),
+  frameRate: 15,
+  repeat: -1
+});
+
 
 // setting collisions between the player and the platform group
-this.physics.add.collider(this.player, this.platformGroup,function(){
+this.platformCollider = this.physics.add.collider(this.player, this.platformGroup,function(){
 
 // play "run" animation if the player is on a platform
             if(!this.player.anims.isPlaying){
@@ -130,6 +167,17 @@ this.physics.add.collider(this.player, this.platformGroup,function(){
               }
           });
       }, null, this);
+
+      // setting collisions between the player and the fire group
+      this.physics.add.overlap(this.player, this.fireGroup, function(player, fire){
+ 
+        this.dying = true;
+        this.player.anims.stop();
+        this.player.setFrame(2);
+        this.player.body.setVelocityY(-200);
+        this.physics.world.removeCollider(this.platformCollider);
+
+    }, null, this);
  
 
 // checking for input
@@ -156,6 +204,7 @@ else{
   this.physics.add.existing(platform);
   platform.body.setImmovable(true);
   platform.body.setVelocityX(Phaser.Math.Between(gameOptions.platformSpeedRange[0], gameOptions.platformSpeedRange[1]) * -1);
+  platform.setDepth(2);
   this.platformGroup.add(platform);
 }
 this.nextPlatformDistance = Phaser.Math.Between(gameOptions.spawnRange[0], gameOptions.spawnRange[1]);
@@ -177,7 +226,29 @@ if(this.addedPlatforms > 1){
           coin.setImmovable(true);
           coin.setVelocityX(platform.body.velocity.x);
           coin.anims.play("rotate");
+          coin.setDepth(2);
           this.coinGroup.add(coin);
+      }
+  }
+    // is there a fire over the platform?
+    if(Phaser.Math.Between(1, 100) <= gameOptions.firePercent){
+      if(this.firePool.getLength()){
+          let fire = this.firePool.getFirst();
+          fire.x = posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth);
+          fire.y = posY - 46;
+          fire.alpha = 1;
+          fire.active = true;
+          fire.visible = true;
+          this.firePool.remove(fire);
+      }
+      else{
+          let fire = this.physics.add.sprite(posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth), posY - 46, "fire");
+          fire.setImmovable(true);
+          fire.setVelocityX(platform.body.velocity.x);
+          fire.setSize(8, 2, true)
+          fire.anims.play("burn");
+          fire.setDepth(2);
+          this.fireGroup.add(fire);
       }
   }
 }
@@ -185,7 +256,7 @@ if(this.addedPlatforms > 1){
 
 // the player jumps when on the ground, or once in the air as long as there are jumps left and the first jump was on the ground
 jump(){
-  if(this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps)){
+  if((!this.dying) && (this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps))){
     if(this.player.body.touching.down){
         this.playerJumps = 0;
     }
@@ -227,6 +298,14 @@ jump(){
           this.coinGroup.remove(coin);
       }
   }, this);
+
+  // recycling fire
+  this.fireGroup.getChildren().forEach(function(fire){
+    if(fire.x < - fire.displayWidth / 2){
+        this.fireGroup.killAndHide(fire);
+        this.fireGroup.remove(fire);
+    }
+}, this);
 
 
     // adding new platforms
