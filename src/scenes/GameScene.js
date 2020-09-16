@@ -26,7 +26,7 @@ export default class GameScene extends Phaser.Scene {
   preload () {
     // load images
     this.load.image('platform', '../src/assets/ground.png');
-    this.load.spritesheet('player', '../src/assets/player.png',{frameWidth: 100, frameHeight: 48});
+    this.load.spritesheet('player', '../src/assets/player.png',{frameWidth: 24, frameHeight: 48});
     this.load.spritesheet("coin", "../src/assets/star.png", {
       frameWidth: 20,
       frameHeight: 20
@@ -185,7 +185,7 @@ if(this.addedPlatforms > 1){
 
 // the player jumps when on the ground, or once in the air as long as there are jumps left and the first jump was on the ground
 jump(){
-if(this.player.body.touching.down || this.playerJumps > 0 && this.playerJumps < gameOptions.jumps){
+  if(this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps)){
     if(this.player.body.touching.down){
         this.playerJumps = 0;
     }
