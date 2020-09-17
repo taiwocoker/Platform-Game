@@ -1,7 +1,11 @@
 import 'phaser';
 import config from '../Config/config';
+import { setScore } from '../score/score';
 
 let game;
+let cursors;
+let scoreText;
+let score = 0;
  
 // global game options
 let gameOptions = {
@@ -15,8 +19,8 @@ let gameOptions = {
     jumpForce: 400,
     playerStartPosition: 200,
     jumps: 2,
-    coinPercent: 25,
-    firePercent: 25
+    coinPercent: 50,
+    firePercent: 20
 }
 
 export default class GameScene extends Phaser.Scene {
@@ -164,9 +168,12 @@ this.platformCollider = this.physics.add.collider(this.player, this.platformGrou
               onComplete: function(){
                   this.coinGroup.killAndHide(coin);
                   this.coinGroup.remove(coin);
+                  setScore(this.getPoints());
               }
           });
       }, null, this);
+
+      
 
       // setting collisions between the player and the fire group
       this.physics.add.overlap(this.player, this.fireGroup, function(player, fire){
@@ -179,9 +186,27 @@ this.platformCollider = this.physics.add.collider(this.player, this.platformGrou
 
     }, null, this);
  
+    
 
 // checking for input
 this.input.on("pointerdown", this.jump, this);
+// cursors = this.input.keyboard.createCursorKeys();
+
+// if (cursors.up.isDown) {
+//     this.player.setVelocityY(-160);
+
+//     this.player.anims.play('up', true);
+// } else if (cursors.right.isDown) {
+//     this.player.setVelocityY(160);
+
+//     this.player.anims.play('right', true);
+// } else {
+//     this.jump;
+//     this.player.anims.play('run');
+// }
+
+
+scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '39px', fill: '#f00' });
 }
 
 // the core of the script: platform are added from the pool or created on the fly
@@ -268,11 +293,19 @@ jump(){
 }
   }
 
+  getPoints() {
+    score += 10
+    scoreText.setText('Score: ' + score)
+  }
+
   update(){
+
+    
  
     // game over
     if(this.player.y > config.height){
-        this.scene.start("Game");
+        this.scene.start("GameOver");
+        this.scene.start("Game")
     }
     this.player.x = gameOptions.playerStartPosition;
 

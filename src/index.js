@@ -8,6 +8,8 @@ import PreloaderScene from './Scenes/PreloaderScene';
 import TitleScene from './Scenes/TitleScene';
 import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
+import { setUser } from './user/user';
+import './user/dom';
 
 class Game extends Phaser.Game {
   constructor () {
@@ -25,4 +27,9 @@ class Game extends Phaser.Game {
 }
 
 
-window.game = new Game();
+const startGame = (user) => {
+  setUser(user);
+  window.game = new Game();
+};
+
+export default startGame;
