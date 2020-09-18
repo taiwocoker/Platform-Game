@@ -13,10 +13,10 @@ export default class LeaderboardScene extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(750, 400, "background");
+    // this.add.image(200,12, "background" )
 
     this.title = this.add.text(0, 0, "Leaderboard", {
-      fontSize: "40px",
+      fontSize: "30px",
       fontStyle: "bold",
       fill: "#fff",
     });
@@ -57,10 +57,12 @@ export default class LeaderboardScene extends Phaser.Scene {
 
       text.setMask(mask);
 
+      
       const zone = this.add
-        .zone(235, 130, 320, 256)
-        .setOrigin(0)
+        .zone(100, 300, 320, 256)
+        .setOrigin(1)
         .setInteractive();
+
 
       zone.on("pointermove", (pointer) => {
         if (pointer.isDown) {

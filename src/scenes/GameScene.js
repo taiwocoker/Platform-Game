@@ -40,6 +40,7 @@ export default class GameScene extends Phaser.Scene {
       frameWidth: 40,
       frameHeight: 70
 });
+    // this.sys.game.globals.jumper = thi;
   }
 
   create () {
@@ -146,6 +147,8 @@ this.anims.create({
   repeat: -1
 });
 
+cursors = this.input.keyboard.createCursorKeys();
+
 
 // setting collisions between the player and the platform group
 this.platformCollider = this.physics.add.collider(this.player, this.platformGroup,function(){
@@ -189,7 +192,7 @@ this.platformCollider = this.physics.add.collider(this.player, this.platformGrou
     
 
 // checking for input
-this.input.on("pointerdown", this.jump, this);
+// this.input.on("pointerdown", this.jump, this);
 // cursors = this.input.keyboard.createCursorKeys();
 
 // if (cursors.up.isDown) {
@@ -299,6 +302,20 @@ jump(){
   }
 
   update(){
+    if (cursors.up.isDown) {
+    // this.player.setVelocityY(-160);
+
+    this.jump();
+} else if (cursors.right.isDown) {
+    this.player.setVelocityY(160);
+
+    this.player.anims.play('right', true);
+
+}
+// } else {
+//     this.jump();
+//     this.player.anims.play('run');
+// }
 
     
  

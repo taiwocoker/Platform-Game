@@ -15,8 +15,6 @@ export default class GameOverScene extends Phaser.Scene {
   }
 
   create() {
-    // this.add.image("background", "../src/assets/desert-bg.png");
-    this.add.image(750, 400, "background");
 
     this.title = this.add.text(0, 0, "Game Over", {
       fontSize: "40px",
