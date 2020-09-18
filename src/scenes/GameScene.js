@@ -1,11 +1,11 @@
 import 'phaser';
 import config from '../Config/config';
-import { setScore } from '../score/score';
+import { setScore, getScore } from '../score/score';
 
 let game;
 let cursors;
 let scoreText;
-let score = 0;
+let score = getScore();
  
 // global game options
 let gameOptions = {
@@ -168,7 +168,7 @@ this.platformCollider = this.physics.add.collider(this.player, this.platformGrou
               onComplete: function(){
                   this.coinGroup.killAndHide(coin);
                   this.coinGroup.remove(coin);
-                  setScore(this.getPoints());
+                  setScore(10);
               }
           });
       }, null, this);
