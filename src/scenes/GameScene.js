@@ -305,7 +305,7 @@ jump(){
     // game over
     if(this.player.y > config.height){
         this.scene.start("GameOver");
-        this.scene.start("Game")
+        // this.scene.start("Game")
     }
     this.player.x = gameOptions.playerStartPosition;
 

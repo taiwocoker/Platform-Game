@@ -1,6 +1,6 @@
 import 'phaser';
 import config from '../config/config';
-import Button from '../object/Button';
+import Button from '../Objects/Button';
 import { getScore, resetScore } from '../score/score';
 import { postScore } from '../score/scoreApi';
 import { getUser } from '../user/user';
@@ -11,11 +11,13 @@ export default class GameOverScene extends Phaser.Scene {
   }
 
   preload() {
-
+    this.load.image("background", "../src/assets/forest-bg.png");
+    
   }
 
   create() {
-    this.add.image(400, 300, '../src/assets/forest-bg');
+    // this.add.image("background", "../src/assets/forest-bg.png");
+    this.add.image(750, 400,'background');
 
     this.title = this.add.text(0, 0, 'Game Over', { fontSize: '40px', fontStyle: 'bold', fill: '#fff' });
     this.score = this.add.text(0, 0, `Score: ${getScore()}`, { fontSize: '30px', fill: '#fff' });
@@ -39,7 +41,9 @@ export default class GameOverScene extends Phaser.Scene {
 
     postScore(user, finalScore);
 
-    this.menuButton = new Button(this, 400, 530, 'button1', 'button2', 'Menu', 'Title');
+    // this.menuButton = new Button(this, 400, 530, 'button1', 'button2', 'Menu', 'Title');
+    this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
+
     resetScore();
   }
 }
