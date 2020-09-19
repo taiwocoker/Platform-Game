@@ -22,11 +22,11 @@ const initGame = async () => {
   return result;
 };
 
-const postScore = async (name, score) => {
-  const post = JSON.stringify({
+const postScore = async (name) => {
+  const post = {
     user: name,
-    score,
-  });
+    score: localStorage.getItem('score'),
+  };
   const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdz/scores/';
   const data = {
     method: 'POST',
@@ -34,7 +34,7 @@ const postScore = async (name, score) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: post,
+    body: JSON.stringify(post),
   };
 
   const response = await fetch(url, data);
