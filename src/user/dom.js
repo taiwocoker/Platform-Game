@@ -3,7 +3,8 @@ import { checkForm, noInputError, clearDOM } from './error';
 import '../style.css';
 
 const inputWrap = document.createElement('div');
-const text = document.createElement('div');
+const text1 = document.createElement('h1')
+const text = document.createElement('h1');
 const input = document.createElement('input');
 const submit = document.createElement('button');
 
@@ -12,10 +13,12 @@ text.classList.add('input-text');
 input.classList.add('input');
 submit.classList.add('submit');
 
+text1.innerHTML = 'TEMPLE RUN';
 text.innerHTML = 'Please enter your name';
 input.placeholder = 'Name...';
 submit.innerHTML = 'Start';
 
+inputWrap.appendChild(text1);
 inputWrap.appendChild(text);
 inputWrap.appendChild(input);
 inputWrap.appendChild(submit);

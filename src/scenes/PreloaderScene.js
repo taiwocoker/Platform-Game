@@ -15,14 +15,14 @@ export default class PreloaderScene extends Phaser.Scene {
     this.add.image(400, 300, "background");
 
     // display progress bar
-    var progressBar = this.add.graphics();
-    var progressBox = this.add.graphics();
+    let progressBar = this.add.graphics();
+    let progressBox = this.add.graphics();
     progressBox.fillStyle(0x222222, 0.8);
     progressBox.fillRect(240, 270, 320, 50);
 
-    var width = this.cameras.main.width;
-    var height = this.cameras.main.height;
-    var loadingText = this.make.text({
+    let width = this.cameras.main.width;
+    let height = this.cameras.main.height;
+    let loadingText = this.make.text({
       x: width / 2,
       y: height / 2 - 50,
       text: "Loading...",
@@ -33,7 +33,7 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     loadingText.setOrigin(0.5, 0.5);
 
-    var percentText = this.make.text({
+    let percentText = this.make.text({
       x: width / 2,
       y: height / 2 - 5,
       text: "0%",
@@ -44,7 +44,7 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     percentText.setOrigin(0.5, 0.5);
 
-    var assetText = this.make.text({
+    let assetText = this.make.text({
       x: width / 2,
       y: height / 2 + 50,
       text: "",
@@ -90,7 +90,8 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image("box", "../src/assets/ui/grey_box.png");
     this.load.image("checkedBox", "../src/assets/ui/blue_boxCheckmark.png");
     this.load.image("platform", "../src/assets/ground.png");
-    this.add.image("background", "../src/assets/desert-bg.png");
+    this.load.image("background", "../src/assets/forest-bg.png");
+    this.load.image("game-over", "../src/assets/game-over.png");
     this.load.spritesheet("player", "../src/assets/player.png", {
       frameWidth: 24,
       frameHeight: 48,

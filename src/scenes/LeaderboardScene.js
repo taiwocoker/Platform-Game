@@ -9,13 +9,13 @@ export default class LeaderboardScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("background", "../src/assets/desert-bg.png");
+    this.load.image("background", "../src/assets/forest-bg.png");
   }
 
   create() {
-    // this.add.image(200,12, "background" )
+    this.add.image(450,400, "background" )
 
-    this.title = this.add.text(0, 0, "Leaderboard", {
+    this.title = this.add.text(0, 0, "Scoreboard", {
       fontSize: "30px",
       fontStyle: "bold",
       fill: "#fff",
@@ -29,7 +29,7 @@ export default class LeaderboardScene extends Phaser.Scene {
 
     Phaser.Display.Align.In.Center(this.title, this.zone);
 
-    this.title.displayOriginY = 210;
+    this.title.displayOriginY = 280;
 
     getScores().then((scores) => {
       const arr = [];
@@ -62,7 +62,6 @@ export default class LeaderboardScene extends Phaser.Scene {
         .zone(100, 300, 320, 256)
         .setOrigin(1)
         .setInteractive();
-
 
       zone.on("pointermove", (pointer) => {
         if (pointer.isDown) {

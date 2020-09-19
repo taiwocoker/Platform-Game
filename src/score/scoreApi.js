@@ -2,30 +2,30 @@ import 'regenerator-runtime';
 
 const fetch = require('node-fetch');
 
-const initGame = async () => {
-  const title = JSON.stringify({
-    name: 'Temple-Run',
-  });
-  const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
-  const data = {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: title,
-  };
+// const initGame = async () => {
+//   const title = JSON.stringify({
+//     name: 'Temple-Run',
+//   });
+//   const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
+//   const data = {
+//     method: 'POST',
+//     headers: {
+//       Accept: 'application/json',
+//       'Content-Type': 'application/json',
+//     },
+//     body: title,
+//   };
 
-  const response = await fetch(url, data);
-  const result = await response.json();
+//   const response = await fetch(url, data);
+//   const result = await response.json();
 
-  return result;
-};
+//   return result;
+// };
 
 const postScore = async (name) => {
   const post = {
     user: name,
-    score: localStorage.getItem('score'),
+    score: localStorage.score,
   };
   const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdz/scores/';
   const data = {
@@ -70,4 +70,4 @@ const getScores = async () => {
   return sortPlayers(result.result);
 };
 
-export { initGame, postScore, getScores };
+export { postScore, getScores };

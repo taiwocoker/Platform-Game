@@ -11,10 +11,12 @@ export default class GameOverScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("background", "../src/assets/desert-bg.png");
+    this.load.image("background", "../src/assets/forest-bg.png");
   }
 
   create() {
+    this.add.image(450,400,"background" )
+
 
     this.title = this.add.text(0, 0, "Game Over", {
       fontSize: "40px",
@@ -39,21 +41,23 @@ export default class GameOverScene extends Phaser.Scene {
     this.title.displayOriginY = 50;
     this.score.displayOriginY = -50;
 
+
     const user = getUser();
     const finalScore = getScore();
 
     postScore(user, finalScore);
 
-    // this.menuButton = new Button(this, 400, 530, 'button1', 'button2', 'Menu', 'Title');
     this.menuButton = new Button(
       this,
-      400,
-      500,
+      450,
+      600,
       "blueButton1",
       "blueButton2",
       "Menu",
       "Title"
     );
+
+
 
     resetScore();
   }
