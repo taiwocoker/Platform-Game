@@ -7,7 +7,6 @@ let cursors;
 let scoreText;
 let score = getScore();
  
-// global game options
 let gameOptions = {
     platformSpeedRange: [300, 300],
     spawnRange: [80, 300],
@@ -29,7 +28,6 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload () {
-    // load images
     this.load.image('platform', '../src/assets/ground.png');
     this.load.spritesheet('player', '../src/assets/player.png',{frameWidth: 24, frameHeight: 48});
     this.load.spritesheet("coin", "../src/assets/star.png", {
@@ -40,80 +38,63 @@ export default class GameScene extends Phaser.Scene {
       frameWidth: 40,
       frameHeight: 70
 });
-    // this.sys.game.globals.jumper = thi;
   }
 
   create () {
-    // keeping track of added platforms
     this.addedPlatforms = 0;
 
     this.platformGroup = this.add.group({
  
-      // once a platform is removed, it's added to the pool
       removeCallback: function(platform){
           platform.scene.platformPool.add(platform)
       }
   });
 
-  // pool
   this.platformPool = this.add.group({
  
-    // once a platform is removed from the pool, it's added to the active platforms group
     removeCallback: function(platform){
         platform.scene.platformGroup.add(platform)
     }
 });
 
-// group with all active coins.
 this.coinGroup = this.add.group({
  
-  // once a coin is removed, it's added to the pool
   removeCallback: function(coin){
       coin.scene.coinPool.add(coin)
   }
 });
 
-// coin pool
 this.coinPool = this.add.group({
 
-  // once a coin is removed from the pool, it's added to the active coins group
   removeCallback: function(coin){
       coin.scene.coinGroup.add(coin)
   }
 });
 
-// / group with all active firecamps.
         this.fireGroup = this.add.group({
  
-            // once a firecamp is removed, it's added to the pool
             removeCallback: function(fire){
                 fire.scene.firePool.add(fire)
             }
         });
  
-        // fire pool
         this.firePool = this.add.group({
  
-            // once a fire is removed from the pool, it's added to the active fire group
             removeCallback: function(fire){
                 fire.scene.fireGroup.add(fire)
             }
         });
 
-// number of consecutive jumps made by the player
 this.playerJumps = 0;
  
-// adding a platform to the game, the arguments are platform width and x position
 this.addPlatform(config.width, config.width / 2, config.height * gameOptions.platformVerticalLimit[1]);
 
-// adding the player;
 this.player = this.physics.add.sprite(gameOptions.playerStartPosition, config.height * 0.7, "player");
 this.player.setGravityY(gameOptions.playerGravity);
 this.player.setDepth(2);
  
-// the player is not dying
 this.dying = false;
-// setting player animation
+
 this.anims.create({
   key: "run",
   frames: this.anims.generateFrameNumbers("player", {
@@ -124,7 +105,6 @@ this.anims.create({
   repeat: -1
 });
 
-// setting coin animation
 this.anims.create({
   key: "rotate",
   frames: this.anims.generateFrameNumbers("coin", {
@@ -136,7 +116,6 @@ this.anims.create({
   repeat: -1
 });
 
-// setting fire animation
 this.anims.create({
   key: "burn",
   frames: this.anims.generateFrameNumbers("fire", {
@@ -150,16 +129,13 @@ this.anims.create({
 cursors = this.input.keyboard.createCursorKeys();
 
 
-// setting collisions between the player and the platform group
 this.platformCollider = this.physics.add.collider(this.player, this.platformGroup,function(){
 
-// play "run" animation if the player is on a platform
             if(!this.player.anims.isPlaying){
                 this.player.anims.play("run");
             }
         }, null, this);
 
-        // setting collisions between the player and the coin group
         this.physics.add.overlap(this.player, this.coinGroup, function(player, coin){
           this.tweens.add({
               targets: coin,
@@ -178,7 +154,6 @@ this.platformCollider = this.physics.add.collider(this.player, this.platformGrou
 
       
 
-      // setting collisions between the player and the fire group
       this.physics.add.overlap(this.player, this.fireGroup, function(player, fire){
  
         this.dying = true;
@@ -189,30 +164,10 @@ this.platformCollider = this.physics.add.collider(this.player, this.platformGrou
 
     }, null, this);
  
-    
-
-// checking for input
-// this.input.on("pointerdown", this.jump, this);
-// cursors = this.input.keyboard.createCursorKeys();
-
-// if (cursors.up.isDown) {
-//     this.player.setVelocityY(-160);
-
-//     this.player.anims.play('up', true);
-// } else if (cursors.right.isDown) {
-//     this.player.setVelocityY(160);
-
-//     this.player.anims.play('right', true);
-// } else {
-//     this.jump;
-//     this.player.anims.play('run');
-// }
-
 
 scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '39px', fill: '#f00' });
 }
 
-// the core of the script: platform are added from the pool or created on the fly
 addPlatform(platformWidth, posX, posY){
 this.addedPlatforms++;
 let platform;
@@ -237,7 +192,6 @@ else{
 }
 this.nextPlatformDistance = Phaser.Math.Between(gameOptions.spawnRange[0], gameOptions.spawnRange[1]);
 
-// is there a coin over the platform?
 if(this.addedPlatforms > 1){
   if(Phaser.Math.Between(1, 100) <= gameOptions.coinPercent){
       if(this.coinPool.getLength()){
@@ -258,7 +212,6 @@ if(this.addedPlatforms > 1){
           this.coinGroup.add(coin);
       }
   }
-    // is there a fire over the platform?
     if(Phaser.Math.Between(1, 100) <= gameOptions.firePercent){
       if(this.firePool.getLength()){
           let fire = this.firePool.getFirst();
@@ -282,7 +235,6 @@ if(this.addedPlatforms > 1){
 }
 }
 
-// the player jumps when on the ground, or once in the air as long as there are jumps left and the first jump was on the ground
 jump(){
   if((!this.dying) && (this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps))){
     if(this.player.body.touching.down){
@@ -291,7 +243,6 @@ jump(){
     this.player.setVelocityY(gameOptions.jumpForce * -1);
     this.playerJumps ++;
 
-    // stops animation
     this.player.anims.stop();
 }
   }
@@ -303,7 +254,6 @@ jump(){
 
   update(){
     if (cursors.up.isDown) {
-    // this.player.setVelocityY(-160);
 
     this.jump();
 } else if (cursors.right.isDown) {
@@ -312,21 +262,12 @@ jump(){
     this.player.anims.play('right', true);
 
 }
-// } else {
-//     this.jump();
-//     this.player.anims.play('run');
-// }
 
-    
- 
-    // game over
     if(this.player.y > config.height){
         this.scene.start("GameOver");
-        // this.scene.start("Game")
     }
     this.player.x = gameOptions.playerStartPosition;
 
-    // recycling platforms
     let minDistance = config.width;
     let rightmostPlatformHeight = 0;
     this.platformGroup.getChildren().forEach(function(platform){
@@ -341,7 +282,6 @@ jump(){
         }
     }, this);
 
-    // recycling coins
     this.coinGroup.getChildren().forEach(function(coin){
       if(coin.x < - coin.displayWidth / 2){
           this.coinGroup.killAndHide(coin);
@@ -349,7 +289,6 @@ jump(){
       }
   }, this);
 
-  // recycling fire
   this.fireGroup.getChildren().forEach(function(fire){
     if(fire.x < - fire.displayWidth / 2){
         this.fireGroup.killAndHide(fire);
@@ -358,7 +297,6 @@ jump(){
 }, this);
 
 
-    // adding new platforms
     if(minDistance > this.nextPlatformDistance){
         let nextPlatformWidth = Phaser.Math.Between(gameOptions.platformSizeRange[0], gameOptions.platformSizeRange[1]);
         let platformRandomHeight = gameOptions.platformHeighScale * Phaser.Math.Between(gameOptions.platformHeightRange[0], gameOptions.platformHeightRange[1]);
