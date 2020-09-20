@@ -1,4 +1,5 @@
-
+/* eslint-disable import/no-cycle */
+/* eslint-disable no-undef */
 import 'phaser';
 import Model from './Model';
 import config from './Config/config';
@@ -14,7 +15,7 @@ import { setUser } from './user/user';
 import './user/dom';
 
 class Game extends Phaser.Game {
-  constructor () {
+  constructor() {
     super(config);
     const model = new Model();
     this.globals = { model, bgMusic: null };

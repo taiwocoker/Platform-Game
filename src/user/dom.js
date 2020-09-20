@@ -1,9 +1,10 @@
+/* eslint-disable import/no-cycle */
 import startGame from '../index';
 import { checkForm, noInputError, clearDOM } from './error';
 import '../style.css';
 
 const inputWrap = document.createElement('div');
-const text1 = document.createElement('h1')
+const text1 = document.createElement('h1');
 const text = document.createElement('h1');
 const input = document.createElement('input');
 const submit = document.createElement('button');

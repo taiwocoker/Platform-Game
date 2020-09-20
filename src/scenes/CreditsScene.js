@@ -1,18 +1,19 @@
+/* eslint-disable no-undef */
 import 'phaser';
 import config from '../Config/config';
-import Button from "../Objects/Button";
+import Button from '../Objects/Button';
 
 export default class CreditsScene extends Phaser.Scene {
   constructor() {
     super('Credits');
   }
 
-  preload(){
-    this.load.image("background", "../src/assets/forest-bg.png");
+  preload() {
+    this.load.image('background', '../src/assets/forest-bg.png');
   }
 
   create() {
-    this.add.image(500,400,"background" )
+    this.add.image(500, 400, 'background');
 
     this.title = this.add.text(0, 0, 'Temple-Run', {
       fontSize: '40px',
@@ -82,7 +83,7 @@ export default class CreditsScene extends Phaser.Scene {
     this.creditsPhaser.displayOriginY = -50;
     this.creditsGDA.displayOriginY = -90;
     this.creditsOGA.displayOriginY = -130;
-    
+
 
     this.menuButton = new Button(
       this,

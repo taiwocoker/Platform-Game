@@ -1,37 +1,38 @@
-import "phaser";
-import config from "../Config/config";
-import Button from "../Objects/Button";
-import { getScore, resetScore } from "../score/score";
-import { postScore } from "../score/scoreApi";
-import { getUser } from "../user/user";
+/* eslint-disable no-undef */
+import 'phaser';
+import config from '../Config/config';
+import Button from '../Objects/Button';
+import { getScore, resetScore } from '../score/score';
+import { postScore } from '../score/scoreApi';
+import { getUser } from '../user/user';
 
 export default class GameOverScene extends Phaser.Scene {
   constructor() {
-    super("GameOver");
+    super('GameOver');
   }
 
   preload() {
-    this.load.image("background", "../src/assets/forest-bg.png");
+    this.load.image('background', '../src/assets/forest-bg.png');
   }
 
   create() {
-    this.add.image(450,400,"background" )
+    this.add.image(450, 400, 'background');
 
 
-    this.title = this.add.text(0, 0, "Game Over", {
-      fontSize: "40px",
-      fontStyle: "bold",
-      fill: "#fff",
+    this.title = this.add.text(0, 0, 'Game Over', {
+      fontSize: '40px',
+      fontStyle: 'bold',
+      fill: '#fff',
     });
     this.score = this.add.text(0, 0, `Score: ${getScore()}`, {
-      fontSize: "30px",
-      fill: "#fff",
+      fontSize: '30px',
+      fill: '#fff',
     });
     this.zone = this.add.zone(
       config.width / 2,
       config.height / 2,
       config.width,
-      config.height
+      config.height,
     );
 
     Phaser.Display.Align.In.Center(this.title, this.zone);
@@ -51,12 +52,11 @@ export default class GameOverScene extends Phaser.Scene {
       this,
       450,
       600,
-      "blueButton1",
-      "blueButton2",
-      "Menu",
-      "Title"
+      'blueButton1',
+      'blueButton2',
+      'Menu',
+      'Title',
     );
-
 
 
     resetScore();
