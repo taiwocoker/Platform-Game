@@ -43,7 +43,7 @@ export default class CreditsScene extends Phaser.Scene {
       fontSize: '26px',
       fill: '#fff',
     });
-    this.creditsGDA = this.add.text(0, 0, 'GameDev Academy', {
+    this.creditsGDA = this.add.text(0, 0, 'https://www.emanueleferonato.com', {
       fontSize: '26px',
       fill: '#fff',
     });
