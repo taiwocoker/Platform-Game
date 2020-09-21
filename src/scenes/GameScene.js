@@ -16,7 +16,7 @@ const gameOptions = {
   platformHeighScale: 20,
   platformVerticalLimit: [0.4, 0.8],
   playerGravity: 900,
-  jumpForce: 500,
+  jumpForce: 450,
   playerStartPosition: 200,
   jumps: 2,
   coinPercent: 50,
