@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, no-plusplus,radix */
+/* eslint-disable no-undef, no-plusplus,radix,import/extensions */
 import 'phaser';
 
 export default class PreloaderScene extends Phaser.Scene {

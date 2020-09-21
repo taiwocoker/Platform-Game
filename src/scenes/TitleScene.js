@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, class-methods-use-this */
+/* eslint-disable no-undef, class-methods-use-this,import/extensions */
 import 'phaser';
 import config from '../Config/config';
 import Button from '../Objects/Button';

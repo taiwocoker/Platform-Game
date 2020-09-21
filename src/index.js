@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-/* eslint-disable no-undef */
+/* eslint-disable no-undef,import/extensions */
 import 'phaser';
 import Model from './Model';
 import config from './Config/config';

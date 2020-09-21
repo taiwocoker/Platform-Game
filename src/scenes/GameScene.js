@@ -1,5 +1,5 @@
 /* eslint-disable no-undef, func-names, no-plusplus,
- no-unused-vars,class-methods-use-this */
+ no-unused-vars,class-methods-use-this,import/extensions */
 import 'phaser';
 import config from '../Config/config';
 import { setScore, getScore } from '../score/score';
