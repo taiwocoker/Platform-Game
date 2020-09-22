@@ -14,7 +14,7 @@ Implementation of a Jump-Based Endless Runner Game built with the [Phaser 3](htt
 The main objective of this project was to build a platform game. The basics of the game are used from the [Endless Runner game](https://www.emanueleferonato.com/2018/11/13/build-a-html5-endless-runner-with-phaser-in-a-few-lines-of-code-using-arcade-physics-and-featuring-object-pooling/) using Phaser and Javascript among other technologies.
 
 
-Live version of the project: [Live version](https://taiwo-coker-game.netlify.app/)
+Live version of the project: [Live version](https://endless-run.netlify.app/)
 
 Project Link: [Javascript-Capstone](https://github.com/taiwocoker/Platform-Game)
 
@@ -36,7 +36,7 @@ You can jump on the platform by using the upper arrow keys on your keyboard
 
 ### Installation
 
-You can always use the [live version](https://taiwo-coker-game.netlify.app/) to play right away or install it locally using these steps:
+You can always use the [live version](https://endless-run.netlify.app/) to play right away or install it locally using these steps:
 
 **Clone the repository by running this command in your terminal**
 ```
