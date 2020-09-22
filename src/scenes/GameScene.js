@@ -148,7 +148,8 @@ export default class GameScene extends Phaser.Scene {
         onComplete() {
           this.coinGroup.killAndHide(coin);
           this.coinGroup.remove(coin);
-          setScore(10);
+          score += 10;
+          scoreText.setText(`${setScore(score)}`);
         },
       });
     }, null, this);
@@ -246,8 +247,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   getPoints() {
-    score += 10;
-    scoreText.setText(`Score: ${score}`);
+
   }
 
   update() {

@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import 'phaser';
+import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin';
 
 export default {
   type: Phaser.AUTO,
@@ -14,5 +15,14 @@ export default {
       gravity: { y: 0 },
       debug: false,
     },
+  },
+  plugins: {
+    scene: [
+      {
+        key: 'rexUI',
+        plugin: RexUIPlugin,
+        mapping: 'rexUI',
+      },
+    ],
   },
 };

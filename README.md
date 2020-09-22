@@ -8,24 +8,35 @@
 
 Implementation of a Jump-Based Endless Runner Game built with the [Phaser 3](https://phaser.io/phaser3) framework
 
-## Live Demo
 
-[Play Online](https://taiwo-coker-game.netlify.app/)
+## About The Project
 
-## About
+The main objective of this project was to build a platform game. The basics of the game are used from the [Endless Runner game](https://www.emanueleferonato.com/2018/11/13/build-a-html5-endless-runner-with-phaser-in-a-few-lines-of-code-using-arcade-physics-and-featuring-object-pooling/) using Phaser and Javascript among other technologies.
 
-The main objective of this project was to build a platform game. The basics of the game are used from the [https://www.emanueleferonato.com/](https://www.emanueleferonato.com/2018/11/13/build-a-html5-endless-runner-with-phaser-in-a-few-lines-of-code-using-arcade-physics-and-featuring-object-pooling/). But, I had to create the overall design of the game, the different scenes, gameplay and scoring system.
+
+Live version of the project: [Live version](https://taiwo-coker-game.netlify.app/)
+
+Project Link: [Javascript-Capstone](https://github.com/taiwocoker/Platform-Game)
 
 ## The game
 
-The character runs endlessly on a platform. In the process of the running, the player jumps and gains points by colliding against coins also avoiding obstacles which is fire for as long as it can because it an endless journey. When the game is over , the user can restart the game. 
+The character runs endlessly on a platform. In the process of the running, the player jumps on the platform and gains points by colliding against coins also avoiding obstacles which is fire for as long as it can because it is an endless journey. When the game is over , the user can restart the game. 
+
+### How to Play
+
+You can jump on the platform by using the upper arrow keys on your keyboard
 
 ### How to play
-- The user inputs his/her name in order to access the game scene. The player starts running and the user uses the upper arrow keyboard to jump or double jump in order to get to the next platform while colliding with coins and avoiding fire. Each coin has a point and when the player falls down, there is a game over scene where the user can see his/her scores.  
+
+- Input your name on the first page and click the submit button, There is a menu on the next page which are Play, Options, Credits and Scoreboard. You can disable the sound in the options menu. Click on the play menu to start your game. Use the upper arrow on the keyboard to jump from one platform to another and at the same time collide with the coins and avoid fire. Happy gaming!
 
 #### Get a local copy
 
 *npm required* - [get npm](https://www.npmjs.com/get-npm)
+
+### Installation
+
+You can always use the [live version](https://taiwo-coker-game.netlify.app/) to play right away or install it locally using these steps:
 
 **Clone the repository by running this command in your terminal**
 ```
@@ -37,15 +48,12 @@ git clone https://github.com/taiwocoker/Platform-Game.git
 cd Platform-Game
 ```
 
-**Install all of the dependencies**
-```
-npm install
-```
+#### Get the dependencies needed for the game
 
-**Bundle the files and start the development server**
-```
-npm run start
-```
+`$ npm install`
+
+#### Start the server and the fun
+`$ npm run dev`
 
 **Visit this link to see the game in your browser** 
 ```

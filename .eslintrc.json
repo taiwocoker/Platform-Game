@@ -10,29 +10,10 @@
   },
   "extends": ["airbnb-base"],
   "rules": {
-    "linebreak-style": 0,
     "no-shadow": "off",
     "no-param-reassign": "off",
     "eol-last": "off",
-    "arrow-parens": "off",
-    "import/no-unresolved": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-   ]
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".json"]
-      }
-    }
+    "arrow-parens": "off"
   },
   "ignorePatterns": [
     "dist/",
