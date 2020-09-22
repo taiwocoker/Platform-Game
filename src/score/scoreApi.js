@@ -2,26 +2,6 @@ import 'regenerator-runtime';
 
 const fetch = require('node-fetch');
 
-// const initGame = async () => {
-//   const title = JSON.stringify({
-//     name: 'Temple-Run',
-//   });
-//   const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
-//   const data = {
-//     method: 'POST',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     },
-//     body: title,
-//   };
-
-//   const response = await fetch(url, data);
-//   const result = await response.json();
-
-//   return result;
-// };
-
 const postScore = async (name, score) => {
   const post = {
     user: name, score,
